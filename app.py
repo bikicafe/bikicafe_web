@@ -1,6 +1,57 @@
 import streamlit as st
 import json
 from datetime import datetime
+import yaml
+from yaml.loader import SafeLoader
+import streamlit_authenticator as stauth
+with open('config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
+
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['preauthorized']
+)
+
+tab1, tab2, tab3 = st.tabs(["登陆", "注册", "忘记密码"])
+with tab1:
+    authenticator.login(fields={'Form name':'登陆', 'Username':'用户名', 'Password':'密码', 'Login':'登陆'})
+    if st.session_state["authentication_status"]:
+        authenticator.logout()
+        st.write(f'Welcome *{st.session_state["name"]}*')
+    elif st.session_state["authentication_status"] is False:
+        st.error('密码错误🤔️')
+    #elif st.session_state["authentication_status"] is None:
+        #st.warning('')
+with tab3:
+    try:
+        username_of_forgotten_password, email_of_forgotten_password, new_random_password = authenticator.forgot_password()
+        if st.session_state["authentication_status"]:
+            tab3=st.empty
+        elif username_of_forgotten_password:
+         st.success('New password is: ')
+         st.success(new_random_password)
+         with open('config.yaml', 'w') as file:
+                yaml.dump(config, file, default_flow_style=False)
+        # The developer should securely transfer the new password to the user.
+        elif username_of_forgotten_password == False:
+            st.error('Username not found')
+    except Exception as e:
+        st.error(e)
+with tab2:
+    try:
+        
+        email_of_registered_user, username_of_registered_user, name_of_registered_user = authenticator.register_user(preauthorization=False,
+        fields={'Form name':'用户注册', 'Email':'邮箱', 'Username':'用户名', 'Password':'密码', 'Repeat password':'重复密码', 'Register':'注册','Name':'姓名'},
+        location='main')
+        if email_of_registered_user:
+            st.success('User registered successfully')
+            with open('config.yaml', 'w') as file:
+                yaml.dump(config, file, default_flow_style=False)
+    except Exception as e:
+        st.error(e)
 
 # 文件路径
 order_filename = 'coffee_orders.json'
@@ -72,7 +123,7 @@ def main():
                 st.error('输入的用户名为空，请重新输入')
             else:
                 order_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                orders[order_time] = (user_id, coffee_choice)
+                orders[order_time] = (user_id,coffee_choice)
                 save_json(orders, order_filename)
                 st.success(f"{user_id} 已成功点单 {coffee_choice} 咖啡！")
 
@@ -103,6 +154,8 @@ def main():
                 feedbacks[feedback_time] = (user_id, feedback)
                 save_json(feedbacks, feedback_filename)
                 st.success(f"谢谢您的宝贵留言，我们会继续努力，祝您天天开心，美事连连！")
+                st.balloons()
+                
 
     with tab3:
         col1, col2 = st.columns(2)
@@ -112,4 +165,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if st.session_state["authentication_status"]:
+       main()
