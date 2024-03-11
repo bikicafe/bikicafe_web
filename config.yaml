@@ -1,0 +1,59 @@
+cookie:
+  expiry_days: 90
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    lorraine:
+      email: wu_yumeng@icekredit.com
+      logged_in: false
+      name: wym
+      password: $2b$12$KUhYz82QaNpPMo0zpqwW3eTCDAEm646qyzfRYCcYXHXIQECQaVbc6
+    shunji:
+      email: lalala@163.com
+      logged_in: false
+      name: shunji
+      password: $2b$12$YY1thOJ.qzeEfAtW7kjB1uiHhTI859tKxljENMNmkLaVSm7UkLfzG
+    stellariaperso:
+      email: 18503004845@163.com
+      logged_in: false
+      name: Stella
+      password: $2b$12$uHg4FwroKSIut2dhteeB/.C5KUFlvHeEOWsXakyC72XO27FKfQQ7m
+    test:
+      email: 123@123.com
+      logged_in: false
+      name: test
+      password: $2b$12$QtJ2MRhxHQzVOKw1ySWRUuyVnQSiakKQgMRj1wC.k95d6UqT.s4U.
+    test1:
+      email: 12321@123.com
+      logged_in: false
+      name: test
+      password: $2b$12$zqx/0xyySuOmDO2HZGhKaOYkYjinsPe3osyOqHNxoDvggCUyGz01i
+    test10:
+      email: 123@icekredit.com
+      logged_in: false
+      name: why
+      password: $2b$12$zvZet7EBwqPoW.RFim7YJuP40gm1vHcDCZXfSkUFdTtH04BtXoQe6
+    test2:
+      email: 123212@123.com
+      logged_in: false
+      name: test
+      password: $2b$12$Xs1EGmuCJ/I63RAZWRwQou8hHwbrAOm6vur5OL/u6jo/9oIwj83z.
+    test3:
+      email: 1232121@123.com
+      logged_in: false
+      name: test
+      password: $2b$12$4bwwFCwh7/L9tMQ508/ixeNo7MkwO8fO9jEqT.GiL.YM91A8xjRqG
+    test4:
+      email: test1@qq.com
+      logged_in: false
+      name: test4
+      password: $2b$12$Graaq0qRiJtwLfo7G98zJOLMzXCADJ0Nt2beviUGWLf6DMmuHi65C
+    why:
+      email: wang_haoyun@icekredit.com
+      logged_in: false
+      name: "\u738B\u660A\u4E91"
+      password: $2b$12$f/cF.237slM7VG6ReQKoBufHl7GDtghoaKOZ1Y3V84t/qhh7pGSxK
+preauthorized:
+  emails:
+  - melsby@gmail.com
